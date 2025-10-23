@@ -1,6 +1,6 @@
 import globalStyles from "@/styles/Main.module.css";
 import styles from "@/components/Navigation/Navigation.module.css";
-import DawidAbramLogo from "../../../public/logo.svg";
+import DawidAbramLogo from "../../../public/logo_.svg";
 import Link from "next/link";
 import clsx from "clsx";
 import { useRouter } from "next/router";
@@ -16,8 +16,10 @@ const Navigation = () => {
   const isBlogRoot = pathname === "/blog";
   const isBlogNested = pathname.startsWith("/blog/"); // /blog/[slug], /blog/category/*, /blog/categories
   const isBlog = isBlogRoot || isBlogNested;
+  const isProjects = pathname === "/projects";
   const isCategories =
     pathname === "/blog/categories" || pathname.startsWith("/blog/category/");
+  
 
   return (
     <div className={clsx(globalStyles.container, styles.navigationContainer)}>
@@ -60,6 +62,15 @@ const Navigation = () => {
               aria-current={isBlog ? "page" : undefined}
             >
               Blog
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/projects"
+              className={clsx(isProjects && styles.activeLink)}
+              aria-current={isProjects ? "page" : undefined}
+            >
+              Projects
             </Link>
           </li>
 

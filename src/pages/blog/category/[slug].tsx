@@ -19,6 +19,8 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
     date: p.date ?? null,
     excerpt: p.excerpt ?? null,
     categories: Array.isArray(p.categories) ? p.categories : [],
+    imageUrl: p.imageUrl,
+    project: p.project,
   }));
   return { props: { slug, posts } };
 };

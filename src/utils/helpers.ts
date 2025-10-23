@@ -3,10 +3,11 @@ import matter from "gray-matter";
 import * as fs from "fs";
 
 export interface BlogPost {
-  data: { title: string; publishedAt: string; imageUrl: string };
+  data: { title: string; publishedAt: string; imageUrl: string; categories?: string[] };
   content: string;
   readingTime: number;
   slug: string;
+  categories: string[];
 }
 
 export const getPosts = (): BlogPost[] => {
@@ -27,12 +28,20 @@ export const getPosts = (): BlogPost[] => {
       );
       const { data, content } = matter(fileContent);
 
+      const rawCategories = (data as Record<string, unknown>)?.categories;
+      const categories = Array.isArray(rawCategories)
+        ? rawCategories.map(String)
+        : rawCategories
+          ? [String(rawCategories)]
+          : [];
+
       const slug = file.name.replace(/.mdx$/, "");
       return {
-        data,
+        data: { ...data, categories },
         content,
         slug,
         readingTime: getReadTimeApproxMinutes(content),
+        categories,
       };
     })
     .filter((post) => post) as BlogPost[];

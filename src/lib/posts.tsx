@@ -11,6 +11,8 @@ export type PostMeta = {
   date: string | null;        // luôn null hoặc ISO string
   excerpt: string | null;
   categories: string[];       // luôn là mảng
+  imageUrl: string | null;
+  project: boolean;
 };
 
 function readAllMdxPaths(): string[] {
@@ -50,6 +52,8 @@ export function getAllPosts(): PostMeta[] {
       date,
       excerpt: data?.excerpt ?? null,
       categories: toArray(data?.categories),
+      imageUrl: data?.imageUrl ?? null,
+      project: Boolean(data?.project),
     };
   });
 }

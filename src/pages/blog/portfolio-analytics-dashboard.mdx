@@ -1,0 +1,37 @@
+---
+title: Building a Portfolio Analytics Dashboard with Next.js and TypeScript
+publishedAt: 08/12/2024
+imageUrl: /images/landscape.webp
+categories: ["projects", "nextjs", "data-visualization"]
+---
+
+import BlogPostLayout from '@/components/BlogPostLayout';
+import BlogPostImage from '../../../public/images/landscape.webp';
+
+export default ({ title, publishedAt, children }) => <BlogPostLayout
+    title="Building a Portfolio Analytics Dashboard with Next.js and TypeScript"
+    description="A walkthrough of how I designed, built, and deployed a personal analytics dashboard using the existing blog tooling."
+    publishedAt="08/12/2024"
+    keywords="nextjs, portfolio, analytics, projects"
+    imageUrl={BlogPostImage}
+>{children}</BlogPostLayout>;
+
+Designing a cohesive digital presence meant bringing the same polish from the blog into a standalone
+project experience. I used the MDX pipeline that already powers the blog to model the project
+brief, technical decisions, and outcomes. The dashboard itself pulls from mocked analytics data and
+renders it with dynamic chart components that respond to the user's theme preference.
+
+## Features shipped
+
+- **Unified content pipeline.** Project case studies live alongside blog posts, which means I can
+  use identical frontmatter, MDX components, and deployment flows without additional tooling.
+- **Category driven discovery.** Tagging projects with shared categories makes it easy to surface
+  related posts and deep dives directly from the new Projects page.
+- **Responsive storytelling.** Every section of the page adapts from mobile through desktop,
+  preserving context and readability regardless of where it's viewed.
+
+## Lessons learned
+
+Reusing the existing MDX setup kept the work focused on experience instead of infrastructure. The
+new Projects page now acts as a curated hub for hands-on work, with category filters that tie back
+into the broader taxonomy already established on the site.

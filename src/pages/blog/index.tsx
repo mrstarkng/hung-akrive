@@ -5,7 +5,7 @@ import styles from "@/styles/Main.module.css";
 import BlogPosts from "@/components/BlogPosts";
 import { BlogPost, getPosts } from "@/utils/helpers";
 
-const SITE_TITLE = "Your Name — Blog";
+const SITE_TITLE = "Hung — Blog";
 const SITE_DESC = "Personal blog posts by Your Name about engineering, ops, and research.";
 const CANONICAL = "https://your-domain.com/blog"; // <- đổi domain của bạn
 

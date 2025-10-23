@@ -3,7 +3,7 @@ import styles from "./Experience.module.css";
 const experiences = [
   {
     when: "Jul 2025 – Present",
-    role: "IT Production Services Intern",
+    role: "IT Production Intern",
     company: "HSBC Vietnam",
     highlights: [
       "Bridged business users and engineers in an ITIL environment to keep core banking SLAs on track.",
@@ -13,10 +13,10 @@ const experiences = [
   {
     when: "Jun 2024 – Sep 2024",
     role: "Research Intern",
-    company: "DPNM Laboratory, POSTECH",
+    company: "DPNM Laboratory, POSTECH, Korea",
     highlights: [
       "Explored high-performance crypto back-testing with a React, Node.js, and PostgreSQL stack.",
-      "Delivered a whitepaper, live demo, and ACM ICBC 2025 submission under faculty supervision.",
+      
     ],
   },
 ] as const;
