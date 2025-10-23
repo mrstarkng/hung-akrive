@@ -2,7 +2,6 @@ import Head from "next/head";
 import styles from "@/styles/Main.module.css";
 import WelcomeHeader from "@/components/WelcomeHeader";
 import LatestPosts from "@/components/LatestPosts";
-import Education from "@/components/Education";
 import { BlogPost, getPosts } from "@/utils/helpers";
 
 type Props = { posts: BlogPost[] };
@@ -33,7 +32,6 @@ export default function Home({ posts }: Props) {
 
       <main className={styles.container}>
         <WelcomeHeader />
-        <Education />
         <LatestPosts posts={posts} />
       </main>
     </>

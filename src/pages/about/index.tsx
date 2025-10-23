@@ -4,6 +4,7 @@ import styles from "./AboutPage.module.css";
 import Image from "next/image";
 import MyImage from "../../../public/test2.webp"; // Renamed for clarity
 import Link from "next/link";
+import Education from "@/components/Education";
 
 export default function About() {
   return (
@@ -67,6 +68,7 @@ export default function About() {
             </div>
           </header>
         </section>
+        <Education />
       </main>
     </>
   );
