@@ -1,6 +1,6 @@
 /* Educations block — nhẹ hơn LatestPosts, có line break phía dưới */
 .section {
-    padding: 1rem 0 1.25rem;
+    padding: 1rem 0 1.1rem;
     /* gọn; chừa 1.25rem trước line */
     border-top: 1px solid var(--lineBreak);
 }
@@ -9,7 +9,7 @@
 .section::after {
     content: "";
     display: block;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     /* khoảng cách từ nội dung đến line */
     border-bottom: 1px solid var(--lineBreak);
 }

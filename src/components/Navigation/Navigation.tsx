@@ -76,7 +76,7 @@ const Navigation = () => {
         </ul>
 
         {/* Right: social links */}
-        <ul>
+        <ul className={styles.socialLinks}>
           <li>
             <a
               href="https://www.linkedin.com/in/little-dinosaur/"
@@ -89,7 +89,7 @@ const Navigation = () => {
               <span className={globalStyles.hideMobile}>LinkedIn</span>
             </a>
           </li>
-                <li>
+          <li>
             <a
               href="https://www.instagram.com/nmlhng__/"
               target="_blank"
@@ -122,7 +122,7 @@ const Navigation = () => {
               <span className={globalStyles.hideDesktop}>
                 <GithubLogo size={20} />
               </span>
-              <span className={globalStyles.hideMobile}>Github</span>
+              <span className={globalStyles.hideMobile}>GitHub</span>
             </a>
           </li>
         </ul>

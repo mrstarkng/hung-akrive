@@ -16,7 +16,7 @@ const experiences = [
     company: "DPNM Laboratory, POSTECH",
     highlights: [
       "Explored high-performance crypto back-testing with a React, Node.js, and PostgreSQL stack.",
-      
+      "Delivered a whitepaper, live demo, and ACM ICBC 2025 submission under faculty supervision.",
     ],
   },
 ] as const;
@@ -35,7 +35,7 @@ export default function Experience() {
               <span className={styles.when}>{experience.when}</span>
               <div className={styles.roleBlock}>
                 <span className={styles.role}>{experience.role}</span>
-                <span className={styles.company}>– {experience.company}</span>
+                <span className={styles.company}>{experience.company}</span>
               </div>
             </div>
 

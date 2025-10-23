@@ -25,6 +25,10 @@
     display: flex;
 }
 
+.navigation .socialLinks {
+    display: none;
+}
+
 .navigation ul li a {
     display: block;
     padding: 20px 0 18px 0;
@@ -46,4 +50,11 @@
 
 .activeLink {
     color: var(--foreground) !important;
+}
+
+@media (min-width: 768px) {
+    .navigation .socialLinks {
+        display: flex;
+        align-items: center;
+    }
 }
