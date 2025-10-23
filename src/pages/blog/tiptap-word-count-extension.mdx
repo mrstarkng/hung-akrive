@@ -1,0 +1,159 @@
+---
+title: React tiptap custom extension for word count
+publishedAt: 08/08/2024
+imageUrl: /images/tiptap.webp
+categories: ["editor", "tiptap"] 
+---
+
+import BlogPostLayout from '@/components/BlogPostLayout';
+import BlogPostImage from '../../../public/images/tiptap.webp';
+
+export default ({ title, publishedAt, children }) => <BlogPostLayout
+    title="React tiptap custom extension for word count"
+    description="Creating a custom extension for React Tiptap to count and limit the number of words"
+    publishedAt="08/08/2024"
+    keywords="reactjs, nextjs, tiptap, custom extension"
+    imageUrl={BlogPostImage}
+>{children}</BlogPostLayout>;
+
+If you are working with React and implementing a rich text editor, then chances are you are using [React Tiptap](https://tiptap.dev/).
+Even though it is a very powerful and flexible editor, it can still be missing some features that you need.
+In this blog post, I will show you how to create a custom extension for React Tiptap to count and limit the number of words.
+
+## The problem
+
+In one of my recent projects, a rich text editor implementation required us to be able to limit to a certain number of words.
+Even though the common practice is to use a character counter, which is something that tiptap offers out of the box, we needed a way to count and limit the number of words in the editor.
+
+## The solution
+
+By looking at the tiptap documentation, I found that it offers a way to create custom extensions.
+Whats even better is that you can view the source code of the extensions that are already available in the library.
+Meaning that based on the CharacterCount extension, we can create our own WordCount extension.
+
+Here is how the extension looks:
+
+```typescript
+import { Extension } from '@tiptap/core';
+import { Node as ProseMirrorNode } from '@tiptap/pm/model';
+import { Plugin, PluginKey } from '@tiptap/pm/state';
+
+export interface WordCountOptions {
+  /**
+   * The maximum number of words that should be allowed. Defaults to `0`.
+   * @default null
+   * @example 180
+   */
+  limit: number | null | undefined;
+}
+
+export interface WordCountStorage {
+  words: (options?: { node?: ProseMirrorNode }) => number;
+}
+
+export const WordCount = Extension.create<WordCountOptions, WordCountStorage>({
+  name: 'wordCount',
+
+  addOptions() {
+    return {
+      limit: null,
+    };
+  },
+
+  addStorage() {
+    return {
+      words: () => 0,
+    };
+  },
+
+  onBeforeCreate() {
+    this.storage.words = (options) => {
+      const node = options?.node || this.editor.state.doc;
+      const text = node.textBetween(0, node.content.size, ' ', ' ');
+      const words = text.split(' ').filter((word) => word !== '');
+
+      return words.length;
+    };
+  },
+
+  addProseMirrorPlugins() {
+    return [
+      new Plugin({
+        key: new PluginKey('wordCount'),
+        filterTransaction: (transaction, state) => {
+          const limit = this.options.limit;
+          if (
+            !transaction.docChanged ||
+            limit === 0 ||
+            limit === null ||
+            limit === undefined
+          ) {
+            return true;
+          }
+
+          const oldSize = this.storage.words({ node: state.doc });
+          const newSize = this.storage.words({ node: transaction.doc });
+          if (newSize <= limit) {
+            return true;
+          }
+          if (oldSize > limit && newSize > limit && newSize <= oldSize) {
+            return true;
+          }
+          if (oldSize > limit && newSize > limit && newSize > oldSize) {
+            return false;
+          }
+
+          const isPaste = transaction.getMeta('paste');
+          if (!isPaste) {
+            return false;
+          }
+
+          const pos = transaction.selection.$head.pos;
+          const over = newSize - limit;
+          const from = pos - over;
+          const to = pos;
+
+          transaction.deleteRange(from, to);
+
+          const updatedSize = this.storage.words({ node: transaction.doc });
+          if (updatedSize > limit) {
+            return false;
+          }
+
+          return true;
+        },
+      }),
+    ];
+  },
+});
+````
+
+In order to use this extension, we need to add it to the configuration of our editor:
+
+```typescript
+const editor = useEditor({
+  extensions: [
+    WordCount.configure({
+      limit: maxWords,
+    }),
+  ],
+});
+```
+
+It can even be used in conjunction with the CharacterCount extension, so that you can count and limit the number of characters and words in the editor:
+
+```typescript
+const editor = useEditor({
+  extensions: [
+    CharacterCount.configure({
+      limit: maxChars,
+    }),
+    WordCount.configure({
+      limit: maxWords,
+    }),
+  ],
+});
+```
+
+And voila! You now have a rich text editor with a word count extension that can be used to limit the number of words in
+🎉

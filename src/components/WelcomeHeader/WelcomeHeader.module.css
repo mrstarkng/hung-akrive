@@ -1,0 +1,82 @@
+/* ----- Banner theo tỉ lệ, full width trong container ----- */
+.hero {
+  /* giữ nguyên theo container ngoài */
+}
+
+.bgWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  /* tỉ lệ giống mockup */
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--foregroundDarker);
+  margin-bottom: 1.25rem;
+  /* khoảng cách dưới banner */
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.25);
+}
+
+.bgImage {
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.02);
+  filter: brightness(0.98);
+}
+
+@media (max-width: 767px) {
+  .bgWrap {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* mobile cao hơn tí, dễ nhìn */
+}
+
+/* ----- Nội dung chào (text) ----- */
+/* Welcome content */
+.welcomeContainer {
+  padding: 2rem 0 2.5rem;
+}
+
+/* BỎ giới hạn chiều ngang để text dài bằng bg */
+.welcomeInner {
+  padding: 0;
+  width: 100%;
+  max-width: none;
+  /* <— QUAN TRỌNG */
+}
+
+.welcomeContainer h1,
+.welcomeContainer p {
+  font-size: 1.125rem;
+  /* nhẹ để nhường spotlight cho banner */
+  line-height: 1.7;
+  margin: 0 0 0.75rem;
+}
+
+.welcomeContainer h1 {
+  margin-bottom: 0.5rem;
+}
+
+.welcomeContainer p a {
+  font-weight: 600;
+}
+
+.welcomeContainer p a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 1024px) {
+  .welcomeContainer {
+    padding: 2.5rem 0 3rem;
+  }
+
+  .welcomeContainer>div {
+    padding: 0;
+  }
+
+  .welcomeInner {
+    width: 100%;
+    max-width: none;
+    /* <— đảm bảo desktop cũng full */
+  }
+}

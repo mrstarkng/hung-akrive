@@ -1,0 +1,84 @@
+/* Educations block — nhẹ hơn LatestPosts, có line break phía dưới */
+.section {
+    padding: 1rem 0 1.25rem;
+    /* gọn; chừa 1.25rem trước line */
+    border-top: 1px solid var(--lineBreak);
+}
+
+/* kẻ mảnh NGAY BÊN DƯỚI Educations */
+.section::after {
+    content: "";
+    display: block;
+    margin-top: 1rem;
+    /* khoảng cách từ nội dung đến line */
+    border-bottom: 1px solid var(--lineBreak);
+}
+
+/* Title nhỏ & mảnh hơn */
+.title {
+    font-size: clamp(1.125rem, 1rem + 0.4vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0.25rem 0 0.5rem;
+}
+
+/* Body text ~16px */
+.list {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.when {
+    font-weight: 600;
+}
+
+.where {
+    word-break: break-word;
+}
+
+.sublist {
+    margin: 2px 0 12px;
+    padding-left: 1.1rem;
+    list-style-type: circle;
+    font-size: 0.98rem;
+    line-height: 1.55;
+}
+
+.muted {
+    opacity: 0.75;
+    font-style: italic;
+}
+
+@media (min-width: 1024px) {
+    .section {
+        padding: 1.25rem 0 1.5rem;
+    }
+
+    /* vẫn gọn trên desktop */
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .list {
+        font-size: 1.0625rem;
+    }
+}
+
+.schoolLink {
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.schoolLink:hover,
+.schoolLink:focus-visible {
+    text-decoration: underline;
+    outline: none;
+}

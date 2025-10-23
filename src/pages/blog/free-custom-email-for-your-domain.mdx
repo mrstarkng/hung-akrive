@@ -1,0 +1,203 @@
+---
+title: Free Custom Email for Your Domain - How to Set Up Email Forwarding with Google without Google Workspace
+publishedAt: 02/17/2023
+imageUrl: /images/4.webp
+categories: ["econometrics", "policy"]   # <— quan trọng
+---
+
+import BlogPostLayout from '@/components/BlogPostLayout';
+import BlogPostImage from '../../../public/images/4.webp';
+import globalStyles from '@/styles/Main.module.css';
+
+export default ({ title, publishedAt, children }) => <BlogPostLayout
+    title="Free Custom Email for Your Domain: How to Set Up Email Forwarding with Google without Google Workspace"
+    description="How to set up a free custom email for your domain. How to set up email forwarding and alias with Google without Google Workspace"
+    publishedAt="02/17/2023"
+    keywords="domain, google domains, gmail"
+    imageUrl={BlogPostImage}
+>{children}</BlogPostLayout>;
+
+Are you considering using a custom email address with your newly purchased domain but hesitant to invest in Google Workspace?
+Well, here's some good news! You can take advantage of Google's email forwarding feature for free, without the need for a paid Google Workspace subscription.
+
+This can be a great solution for individuals and small businesses who don't have a large team to manage their email communications.
+In this blog post, I will walk you through how to set up email forwarding and alias with Google to send and receive emails as your custom domain email.
+
+## Email forwarding setup
+
+Suppose you have recently purchased a domain name, <span className="highlight">dawid.app</span>, and now you want to be able to send and receive emails using the email address <span className="highlight">hello@dawid.app</span>.
+To set this up, you will need to create another free email account on Gmail, which will be used for forwarding emails from your custom to your personal email address.
+This additional email account can be one that you've used before or you can create a new one using Gmail.
+
+We will begin by setting up email forwarding from your custom domain email to your personal <span className="highlight">@gmail.com</span> email.
+In this example the personal email will be <span className="highlight">dawidabramwd@gmail.com</span>.
+
+<u>**Step 1**:</u> Begin by logging into your domains.google account at [https://domains.google.com/](https://domains.google.com/).
+
+<u>**Step 2**:</u> Click <span className="highlight">manage</span> on the domain you want to set up your custom email for:
+
+<img src="/blog/google-domain/1.png" alt="Manage button in my domains section on google domains" />
+
+<u>**Step 3**:</u> After navigating to your domain, navigate to the <span className="highlight">email</span> section on the left sidebar
+
+<img src="/blog/google-domain/2.png" alt="Sidebar with email button on google domains" />
+
+<u>**Step 4**:</u> In the email panel, on the right, scroll down to the <span className="highlight">Email forwarding</span> section and click on <span className="highlight">Add email alias</span>
+
+<img src="/blog/google-domain/3.png" alt="Email forwarding section on google domains" />
+
+<u>**Step 5**:</u> In the left field input the alias you want to use for your custom domain email. In this example it will be <span className="highlight">hello</span> as we are going for <span className="highlight">hello@dawid.app</span>.
+In the right field input your personal existing gmail email. The one to which the emails will be forwarded to.
+
+<img src="/blog/google-domain/4.png" alt="Email forwarding section on google domains" />
+
+<u>**Step 6**:</u> If the personal email you input in the previous step owns the domain you should be able to skip this step.
+Else you will receive a confirmation email on the personal email, to confirm it is you are trying to set up the forwarding.
+Therefore, log in to your personal email and verify it is you setting it up.
+
+Aaand for the forwarding we are done! 🎉
+
+The email forwarding should now work. Whenever someone sends email to <span className="highlight">hello@dawid.app</span> you will receive those emails on your personal gmail account.
+You won’t be able to send emails from the custom domain email just yet, this is what we will solve in the next section.
+
+## Sending emails from your custom domain email
+
+We can receive emails sent to our custom <span className="highlight">hello@dawid.app</span> email, but we want to also be able to send emails from it to our customers.
+Let’s work on that.
+
+<u>**Step 1**:</u> Log into your personal gmail account to which you forwarded emails to in the previous section.
+When logged in, in the top right corner of your screen, click on your avatar and navigate to <span className="highlight">Manage your Google account</span>.
+
+<img src="/blog/google-domain/5.png" alt="Click on Google Account button on gmail" />
+
+<u>**Step 2**:</u> On the left sidebar navigation click <span className="highlight">Security</span>
+
+<img src="/blog/google-domain/6.png" alt="Security button on gmail" />
+
+<u>**Step 3**:</u> Under the section called <span className="highlight">Signing in to Google</span> you should see <span className="highlight">2-Step verification</span>.
+**If you don’t have 2-Step verification set up, you will have to do that first**.
+After that you will be able to set up the <span className="highlight">App passwords</span> which is what we want, so click on that.
+
+<img src="/blog/google-domain/7.png" alt="Signing in to google section on gmail, click on app passwords" />
+
+<u>**Step 4**:</u> After clicking on <span className="highlight">App passwords</span> Google will probably ask you to log in again for security purposes, so let’s log back in.
+
+<u>**Step 5**:</u> Click on <span className="highlight">Select app</span> and select the <span className="highlight">Other (Custom name)</span> option
+
+<img src="/blog/google-domain/8.png" alt="Setting up app password on gmail, select Other (custom name)" />
+
+<u>**Step 6**:</u> In the input that appeared make sure to enter <span className="highlight">Gmail</span> and then press <span className="highlight">GENERATE</span>
+
+<img src="/blog/google-domain/9.png" alt="Input Gmail into the box that appeared for app passwords" />
+
+<u>**Step 7**:</u> You will now see a dialog with an <span className="highlight">App password</span> for your device. **Copy this password**.
+
+<img src="/blog/google-domain/10.png" alt="Cope the app password for your device" />
+
+<u>**Step 8**:</u> After copying the password, navigate to your personal gmail account. In the top right corner of the screen click on the cog wheel and on <span className="highlight">See all settings</span>
+
+<img src="/blog/google-domain/11.png" alt="Clicking the cogwheel and navigating to see all settings in gmail" />
+
+<u>**Step 9**:</u> In the <span className="highlight">Settings</span> navigate to the <span className="highlight">Accounts and Import</span> tab
+
+<img src="/blog/google-domain/12.png" alt="Click on the accounts and import tab in the settings" />
+
+<u>**Step 10**:</u> Under the <span className="highlight">Send mail as</span> section click on <span className="highlight">Add another email address</span>
+
+<img src="/blog/google-domain/13.png" alt="Add another email address under send mail as section on gmail" />
+
+<u>**Step 11**:</u> Google will open a new window for you where you will now be able to set up an alias for the custom email.
+In the <span className="highlight">Email address</span> field type in the custom email address you are setting it up for.
+For the example we are setting it up for <span className="highlight">hello@dawid.app</span>
+
+<img src="/blog/google-domain/14.png" alt="Inputting custom email address into the email address field" />
+
+<u>**Step 12**:</u> On the next step set the <span className="highlight">SMTP Server</span> to be <span className="highlight">smtp.gmail.com</span>.
+For the Username enter your personal email, not the custom email here.
+**For the password paste in the password you copied in Step 7**. Then press <span className="highlight">Add Account</span>
+
+<img src="/blog/google-domain/15.png" alt="Inputting the SMTP details for personal email" />
+
+<u>**Step 13**:</u> You will now see a confirm verification screen, meaning that all that's left is to confirm on the personal email.
+Navigate to your email and confirm it. (It will say the email was sent to is your new custom email,
+but if you followed the first section of this tutorial then you will simply receive that email on your personal email you set it up for)
+
+<img src="/blog/google-domain/16.png" alt="Confirm verification on your email dialog" />
+
+You can now receive as well as **send** emails from your new custom domain email! 🎉
+
+When sending emails, when you want to send an email as the new custom email, simply click on the <span className="highlight">From</span> field and select the custom email you want it to be sent from.
+
+<img src="/blog/google-domain/17.png" alt="Selecting which email to send the email from on gmail" />
+
+## What if you point your domain to your websites host name servers?
+
+You may have changed the name servers of your domain to point it to your website's hosting provider in order to get your website up and running.
+However, this action can result in an unexpected problem - your email forwarding breaks.
+This means that while you can still send emails from your custom email address, you may not be able to receive any incoming emails.
+This can be a frustrating issue, but don't worry - we will fix it by doing the following.
+
+Simply add MX records in your website’s hosting provider to Google.
+
+The values have to be as following:
+
+<table>
+    <thead>
+        <tr>
+            <th className={globalStyles.hideMobileTable}>Name</th>
+            <th className={globalStyles.hideMobileTable}>Type</th>
+            <th className={globalStyles.hideMobileTable}>TTL</th>
+            <th>Priority</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td className={globalStyles.hideMobileTable}>Blank or @</td>
+            <td className={globalStyles.hideMobileTable}>MX</td>
+            <td className={globalStyles.hideMobileTable}>1H</td>
+            <td>5</td>
+            <td>gmr-smtp-in.l.google.com</td>
+        </tr>
+        <tr>
+            <td className={globalStyles.hideMobileTable}>Blank or @</td>
+            <td className={globalStyles.hideMobileTable}>MX</td>
+            <td className={globalStyles.hideMobileTable}>1H</td>
+            <td>10</td>
+            <td>alt1.gmr-smtp-in.l.google.com</td>
+        </tr>
+        <tr>
+            <td className={globalStyles.hideMobileTable}>Blank or @</td>
+            <td className={globalStyles.hideMobileTable}>MX</td>
+            <td className={globalStyles.hideMobileTable}>1H</td>
+            <td>20</td>
+            <td>alt2.gmr-smtp-in.l.google.com</td>
+        </tr>
+        <tr>
+            <td className={globalStyles.hideMobileTable}>Blank or @</td>
+            <td className={globalStyles.hideMobileTable}>MX</td>
+            <td className={globalStyles.hideMobileTable}>1H</td>
+            <td>30</td>
+            <td>alt3.gmr-smtp-in.l.google.com</td>
+        </tr>
+        <tr>
+            <td className={globalStyles.hideMobileTable}>Blank or @</td>
+            <td className={globalStyles.hideMobileTable}>MX</td>
+            <td className={globalStyles.hideMobileTable}>1H</td>
+            <td>40</td>
+            <td>alt4.gmr-smtp-in.l.google.com</td>
+        </tr>
+    </tbody>
+</table>
+
+## Final thoughts
+
+Congratulations! With domain email forwarding now set up, you can enjoy the benefits of a professional-looking custom email address for your domain,
+allowing you to send and receive emails seamlessly. This easy-to-implement solution is especially ideal for individuals and small businesses looking
+to establish a professional online presence without incurring additional costs.
+I hope this guide has been helpful in providing you with the necessary steps to set up email forwarding for your domain.
+
+<br/><br/>
+Happy emailing and thanks for reading! ❤️
+
+Also be sure to check out my [youtube channel](https://youtube.com/@webdevbydawid) if you haven't yet

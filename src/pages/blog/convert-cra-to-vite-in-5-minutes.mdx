@@ -1,0 +1,212 @@
+---
+title: Convert Create React App (CRA) to Vite in 5 minutes
+publishedAt: 02/13/2023
+imageUrl: /images/2.webp
+categories: ["econometrics", "policy"]   # <— quan trọng
+---
+
+import BlogPostLayout from '@/components/BlogPostLayout';
+import BlogPostImage from '../../../public/images/2.webp';
+
+export default ({ title, publishedAt, children }) => <BlogPostLayout
+    title="Convert Create React App (CRA) to Vite in 5 minutes"
+    description="Convert Create React App (CRA) to Vite in 5 minutes"
+    publishedAt="02/13/2023"
+    keywords="reactjs, cra, vite"
+    imageUrl={BlogPostImage}
+>{children}</BlogPostLayout>;
+
+I managed to migrate a Create React App (CRA) to Vite in under 5 minutes and the results are amazing! The start up times, the npm installs, the builds…
+
+This conversion was done on a small react project you can find on [my github](https://github.com/DawidAbram/react-simple-portfolio).
+Also if you are interested, [here](https://youtu.be/yoLWXnLUjOw) is a video of me actually doing the conversion.
+
+## What is Vite?
+
+[Vite](https://vitejs.dev/) (pronounced veet) is a build tool that aims to provide a faster and leaner development experience for modern web projects.
+It has been created by Evan You, the creator of Vue. It allows for a faster development thanks to its features such as fast [Hot Module Replacement](https://vitejs.dev/guide/features.html#hot-module-replacement) (HMR), [TypeScript support](https://vitejs.dev/guide/features.html#typescript) out of the box, as well as super fast cold starts.
+
+Vite leverages the power of [native ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), [esbuild](https://esbuild.github.io/) and [Rollup](https://rollupjs.org/) to improve development and build time.
+Unlike CRA, Vite does not build the entire application before serving, instead it builds the application on demand.
+
+<img src="/images/i-am-speed.gif" alt="I am speed animation" />
+
+## Why switch to Vite?
+
+Create React App (CRA) has been the go-to tool for most developers to quickly scaffold a react project for a long time.
+It has allowed many developers, including myself, to quickly setup and maintain a lot of projects.
+However, here are some reasons why I decided and would probably recommend you to also switch:
+
+- **Speed** - As the size of the app increases, you can really begin to feel the difference in speed even in just the cold starts. Unlike CRA or bundler-based build setup, Vite does not build the entire application before serving. It divides the application modules into two categories of dependencies and source code. CRA uses webpack under the hood, which bundles the entire application code before it can be served. With a large codebase, it takes more time to spin up the development server and reflect the changes made, where as with Vite that is not the case.
+
+- **Reloads** - Less time spent waiting for reload of changes reflecting file updates. In Vite, Hot Module Replacement (HMR) is performed over native ES Modules. When a file is edited, Vite invalidates the chain between the edited module and its closest HMR boundary. This makes HMR updates simple and fast regardless of the size of your application.
+
+- **Build** - Faster build times. Vite ships with a pre-configured build command that includes many performance optimizations out of the box, such as async chunk loading and CSS code splitting.
+
+- **TypeScript** - Vite provides support of typescript out of the box. It uses esbuild to transpile TypeScript into JavaScript which is about 20-30x faster than vanilla tsc.
+
+You can find more information about why [right here](https://vitejs.dev/guide/why.html)
+
+## How to migrate
+
+Here are the steps I took to migrate my Create React App to Vite in literally 5 minutes.
+Worth noting that if you have a large production application, it might take a tiny bit longer since you will probably have to add some custom settings, but I think it's still possible! 💪
+
+### Install dependencies
+
+We’ll start off by installing 4 dependencies that include <span className="highlight">Vite, @vitejs/plugin-react, vite-tsconfig-paths and vite-plugin-svgr</span>.
+
+In order to do that, let’s run an npm install command:
+
+```shell
+npm i --save-dev vite @vitejs/plugin-react, vite-tsconfig-paths vite-plugin-svgr
+```
+
+### Create Vite config file
+
+In the <span className="highlight">root directory</span> of your project (not in /src or /app, in the root folder) create a <span className="highlight">vite.config.ts</span> file. This is the file where you specify all of Vite configuration options, such as plugins, port to run development server on, opening app on server start etc.
+
+Inside the file paste the following:
+
+```typescript
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import viteTsconfigPaths from 'vite-tsconfig-paths';
+import svgrPlugin from 'vite-plugin-svgr';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    react(),
+    viteTsconfigPaths(),
+    svgrPlugin()
+  ],
+  server: {
+    port: 4000,
+    open: true
+  }
+});
+```
+
+### Create Vite env file
+
+Create a <span className="highlight">vite-env.d.ts</span> file inside of the <span className="highlight">/src</span> folder and inside the file paste the following:
+
+```typescript
+// <reference types="vite/client" />
+```
+
+### Update tsconfig.json
+
+Update the <span className="highlight">tsconfig.json</span> file (located in your root directory).
+The fields that we need to update are <span className="highlight">target, lib and types</span>. Target and lib should already have a value so replace them, types might have to be added.
+
+Here is an example <span className="highlight">tsconfig.json</span> file:
+
+```typescript
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "types": [
+      "vite/client",
+      "vite-plugin-svgr/client"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "src"
+  ]
+}
+```
+
+### index.html file adjustments
+
+We will need to do a couple of <span className="highlight">index.html</span> adjustments in order for Vite to work.
+
+1. Move the <span className="highlight">index.html</span> file out from the <span className="highlight">/public</span> folder into the <span className="highlight">root</span> folder of your project.
+2. Inside <span className="highlight">index.html</span> remove all references of <span className="highlight">%PUBLIC_URL%</span>. For example instead of <span className="highlight">%PUBLIC_URL%/logo192.png</span> leave it as <span className="highlight">/logo192.png</span>.
+3. Add the below script below the div element with id <span className="highlight">root</span> inside the <span className="highlight">body</span> as such:
+
+```typescript
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <script type="module" src="/src/index.tsx"></script>
+</body>
+```
+
+### Remove react-scripts
+
+We will no longer need react-scripts, we are ready to remove it. Run the command to uninstall it:
+
+```shell
+npm uninstall react-script
+```
+
+You can also delete <span className="highlight">react-app-env.d.ts</span> file if you have it.
+
+### Update package.json
+
+We are now ready to update the <span className="highlight">package.json</span> to use the newly added vite instead of react-scripts.
+
+In order to do this replace the scripts inside of <span className="highlight">package.json</span> with the following:
+
+```typescript
+"scripts": {
+  "start": "vite",
+  "build": "tsc && vite build",
+  "serve": "vite preview"
+},
+```
+
+### Update environmental variables testing super long
+
+If you have any environmental variables in the <span className="highlight">.env</span> files, you will also have to update them to begin with <span className="highlight">VITE_</span> instead of <span className="highlight">REACT_APP_</span>
+
+### Run your app
+
+You are now ready to start up your app, powered by Vite.<br/>
+Run the <span className="highlight">npm start</span> command and be amazed by the speed!
+
+🎉
+
+## Build folder
+
+Also, worth noting that in Vite the default production build folder is <span className="highlight">dist</span>. You can change this inside of <span className="highlight">vite.config.ts</span> file, for example by setting it to the CRA’s default <span className="highlight">build</span> folder, as such:
+
+```typescript
+export default defineConfig({
+  ...
+  build: {
+    outDir: 'build',
+  },
+});
+```
+
+## Final thoughts
+
+I think considering how fast and simple the conversion was, with the results it provided, I couldn’t be happier.
+I am not sure why anyone wouldn’t do this, what do you think?
+
+Be sure to check out [my youtube](https://www.youtube.com/@webdevbydawid) channel where you can find me doing this conversion as well as many more coding related videos.
+
+
+<br/><br/>
+Thanks for reading! ❤️
