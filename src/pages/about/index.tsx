@@ -5,6 +5,7 @@ import Image from "next/image";
 import MyImage from "../../../public/test2.webp"; // Renamed for clarity
 import Link from "next/link";
 import Education from "@/components/Education";
+import Experience from "@/components/Experience";
 
 export default function About() {
   return (
@@ -69,6 +70,7 @@ export default function About() {
           </header>
         </section>
         <Education />
+        <Experience />
       </main>
     </>
   );

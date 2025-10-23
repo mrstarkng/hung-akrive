@@ -1,0 +1,65 @@
+.section {
+    padding: 1rem 0 1.25rem;
+    border-top: 1px solid var(--lineBreak);
+}
+
+.section::after {
+    content: "";
+    display: block;
+    margin-top: 1rem;
+    border-bottom: 1px solid var(--lineBreak);
+}
+
+.title {
+    font-size: clamp(1.125rem, 1rem + 0.4vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0.25rem 0 0.5rem;
+}
+
+.list {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.roleRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.when {
+    font-weight: 600;
+}
+
+.where {
+    word-break: break-word;
+}
+
+.bullets {
+    margin: 2px 0 12px;
+    padding-left: 1.1rem;
+    list-style-type: circle;
+    font-size: 0.98rem;
+    line-height: 1.55;
+}
+
+.highlight {
+    font-weight: 500;
+}
+
+@media (min-width: 1024px) {
+    .section {
+        padding: 1.25rem 0 1.5rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .list {
+        font-size: 1.0625rem;
+    }
+}
