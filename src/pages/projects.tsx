@@ -2,11 +2,11 @@ import { useMemo, useState } from "react";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 import clsx from "clsx";
 
 import layout from "@/styles/Main.module.css";
 import styles from "@/styles/Projects.module.css";
-import BlogPosts from "@/components/BlogPosts";
 import { BlogPost, getPosts } from "@/utils/helpers";
 
 const SITE_TITLE = "Your Name — Projects";
@@ -49,6 +49,19 @@ export const getStaticProps: GetStaticProps<Props> = () => {
   };
 };
 
+const formatPublishedDate = (input?: string) => {
+  if (!input) return null;
+
+  const parsed = new Date(input);
+  if (Number.isNaN(parsed.getTime())) return null;
+
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  }).format(parsed);
+};
+
 const ProjectsPage = ({ projects, categories }: Props) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const filterOptions = useMemo(() => ["All", ...categories], [categories]);
@@ -81,7 +94,7 @@ const ProjectsPage = ({ projects, categories }: Props) => {
         <header className={styles.header}>
           <h1 className={layout.mainTitle}>Projects</h1>
           <nav aria-label="Secondary">
-            <Link href="/blog/categories">Browse all categories →</Link>
+            <Link href="/blog/categories">Categories →</Link>
           </nav>
         </header>
 
@@ -107,7 +120,53 @@ const ProjectsPage = ({ projects, categories }: Props) => {
         </div>
 
         {filteredProjects.length > 0 ? (
-          <BlogPosts posts={filteredProjects} />
+          <div className={styles.projectGrid}>
+            {filteredProjects.map((project) => {
+              const href = `/blog/${project.slug}`;
+              const primaryCategory = project.categories[0];
+              const publishedLabel =
+                formatPublishedDate(project.data.publishedAt || project.data.date) ??
+                project.data.publishedAt ??
+                project.data.date ??
+                null;
+              const publishedDateTime = (() => {
+                const raw = project.data.publishedAt || project.data.date;
+                const parsed = raw ? new Date(raw) : null;
+                if (!parsed || Number.isNaN(parsed.getTime())) return undefined;
+                return parsed.toISOString();
+              })();
+
+              return (
+                <Link href={href} className={styles.projectCard} key={project.slug}>
+                  <div className={styles.projectImageWrapper}>
+                    {project.data.imageUrl ? (
+                      <Image
+                        src={project.data.imageUrl}
+                        alt={project.data.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className={styles.projectImage}
+                      />
+                    ) : (
+                      <div className={styles.projectImageFallback} aria-hidden="true" />
+                    )}
+                  </div>
+
+                  <div className={styles.projectCardBody}>
+                    {primaryCategory ? (
+                      <p className={styles.projectCategory}>{primaryCategory}</p>
+                    ) : null}
+                    <h2 className={styles.projectTitle}>{project.data.title}</h2>
+                    {publishedLabel ? (
+                      <div className={styles.projectMeta}>
+                        <time dateTime={publishedDateTime}>{publishedLabel}</time>
+                      </div>
+                    ) : null}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         ) : (
           <p className={styles.emptyState}>No projects found for this category yet.</p>
         )}
