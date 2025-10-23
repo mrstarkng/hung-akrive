@@ -1,65 +1,122 @@
 .section {
-    padding: 1rem 0 1.25rem;
-    border-top: 1px solid var(--lineBreak);
-}
-
-.section::after {
-    content: "";
-    display: block;
-    margin-top: 1rem;
-    border-bottom: 1px solid var(--lineBreak);
+    padding: 1rem 0 1.5rem;
 }
 
 .title {
     font-size: clamp(1.125rem, 1rem + 0.4vw, 1.5rem);
     font-weight: 600;
     line-height: 1.3;
-    margin: 0.25rem 0 0.5rem;
+    margin: 0.25rem 0 0.75rem;
 }
 
 .list {
+    position: relative;
     margin: 0;
-    padding-left: 1.1rem;
-    font-size: 1rem;
-    line-height: 1.6;
+    padding: 0 0 0 1.75rem;
+    display: grid;
+    gap: 1.75rem;
+}
+
+.list::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0.55rem;
+    width: 2px;
+    background: linear-gradient(180deg, rgba(92, 124, 250, 0.35), rgba(132, 94, 247, 0.25));
+}
+
+.item {
+    position: relative;
+    padding-left: 0.5rem;
+}
+
+.item::before {
+    content: "";
+    position: absolute;
+    top: 0.35rem;
+    left: -1.2rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #5c7cfa, #845ef7);
+    box-shadow: 0 0 0 4px rgba(132, 94, 247, 0.14);
 }
 
 .roleRow {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 0.5rem 0.75rem;
+    align-items: baseline;
 }
 
 .when {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.15rem 0.65rem;
+    border-radius: 999px;
+    border: 1px solid rgba(132, 94, 247, 0.25);
+    background: rgba(92, 124, 250, 0.08);
+}
+
+.roleBlock {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.role {
     font-weight: 600;
 }
 
-.where {
-    word-break: break-word;
+.company {
+    color: var(--foregroundDarker);
 }
 
-.bullets {
-    margin: 2px 0 12px;
-    padding-left: 1.1rem;
-    list-style-type: circle;
+.points {
+    margin-top: 0.75rem;
+    padding-left: 1.15rem;
+    list-style: disc;
     font-size: 0.98rem;
     line-height: 1.55;
 }
 
-.highlight {
-    font-weight: 500;
+.points li {
+    margin-bottom: 0.35rem;
+}
+
+.points li:last-child {
+    margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+    .title {
+        margin-bottom: 1rem;
+    }
+
+    .roleBlock {
+        font-size: 1.0625rem;
+    }
 }
 
 @media (min-width: 1024px) {
     .section {
-        padding: 1.25rem 0 1.5rem;
-    }
-
-    .title {
-        font-size: 1.5rem;
+        padding: 1.25rem 0 1.75rem;
     }
 
     .list {
-        font-size: 1.0625rem;
+        gap: 2rem;
+        padding-left: 2rem;
+    }
+
+    .list::before {
+        left: 0.65rem;
+    }
+
+    .item::before {
+        left: -1.05rem;
     }
 }
